@@ -1,0 +1,546 @@
+%Preambulo geral -2011
+%opcoes: [teorema,cabecalho,comandos]
+\usepackage[brazil]{babel}
+\usepackage{amssymb,amsfonts,indentfirst}
+\usepackage[centertags]{amsmath}
+\usepackage{enumerate,multicol,subfig,cancel,makeidx,emptypage}
+\usepackage{tikz}
+  \usetikzlibrary{calc,positioning,shapes.geometric,decorations.markings}
+\usepackage{wasysym,stmaryrd,mathrsfs,eufrak}
+\usepackage{lipsum,calc,soul}%fourier}
+\usepackage{showexpl}	%exibe os codigos
+%%for\c ca um \pagestyle{empty} em \part
+\usepackage{etoolbox}
+  \patchcmd{\part}{plain}{empty}{}{}
+
+%********************************************************************
+% Modo matem\'atico em tamanho normal
+\everymath{\displaystyle}
+% Define o caminho das figuras. V\'alido somente para o comando \includegraphics
+\graphicspath{{figuras/}}
+
+%********************************************************************
+\@ifclassloaded{memoir}{
+  % sem n\'umero de p\'agina no sum\'ario do memoir
+  \renewcommand{\cfttocbeforelisthook}{\pagestyle{empty}\let\ps@plain\ps@empty}
+  \renewcommand{\cfttocafterlisthook}{\cleardoublepage\pagestyle{headings}}
+}{
+  % sem n\'umero de p\'agina no sum\'ario de article, report ou book
+  \patchcmd{\tableofcontents}{\@starttoc{toc}}{\thispagestyle{empty}\pagestyle{empty}\@starttoc{toc}}{}{}
+}
+
+%********************************************************************
+\RequirePackage{kvoptions}
+ \SetupKeyvalOptions{%
+   family=MyPack,
+   prefix=MyPack@,
+ }
+
+% Define as opcoes para carregar apenas um trecho deste pacote
+\DeclareBoolOption{teorema}
+\DeclareBoolOption{cabecalho}
+\DeclareBoolOption{comandos}
+
+% Define as operacoes boleanas
+\ProcessKeyvalOptions*
+\ifboolexpr{
+    not (bool{MyPack@teorema}) and
+    not (bool{MyPack@cabecalho}) and
+    not (bool{MyPack@comandos})
+}{%
+  \booltrue{MyPack@teorema}
+  \booltrue{MyPack@cabecalho}
+  \booltrue{MyPack@comandos}
+}{}
+%********************************************************************
+% Configuracao de ambiente de teorema
+% a numeracao do teorema depende da classe de documento
+\usepackage{theorem}
+
+\newcommand*{\teorema}[1][chapter]{
+  \newtheorem{teo}{Teorema}[#1]
+  \theorembodyfont{\normalfont\upshape}
+  \newtheorem{ex}{Exemplo}[#1]
+  \newtheorem{Exerc}{}[#1]
+  \newtheorem{exerc}{
+    \renewcommand{\theexerc}{\arabic{exerc}.}
+  }
+  \newtheorem{cor}[teo]{Corol\'ario}
+  \newtheorem{lem}[teo]{Lema}
+  \newtheorem{prop}[teo]{Proposi\c{c}\~ao}
+  \newtheorem{axi}[teo]{Axioma}
+  \newtheorem{fato}[teo]{Fato}
+  \theorembodyfont{\normalfont\upshape}
+  \newtheorem{defn}[teo]{Defini\c{c}\~ao}
+}
+
+% Escolhe a numeracao do teorema a partir da classe de documento
+% {condicao}{verdadeiro}{falso}
+\ifMyPack@teorema{
+  \@ifclassloaded{article}{\teorema[section]}{\teorema}
+}
+\fi
+% OBSOLETO
+% Escolhe a numeracao do teorema a partir da classe de documento
+% \ifMyPack@teorema
+% {\@ifclassloaded{book}{\teorema}
+%   {\@ifclassloaded{article}{\teorema[section]}
+%     {\@ifclassloaded{report}{\teorema}
+% 	{\@ifclassloaded{memoir}{\teorema}
+% 	  {\typeout{Error: Classe nao suportada: 'article', 'report', 'book' ou 'memoir' sao suportadas.}
+% 	}
+%       }
+%     }
+%   }
+% }
+% \fi
+%********************************************************************
+% Ambiente para demonstrac\~ao que coloca quadrado no final, usando \rule
+% Nota: \rule{largura}{altura} produz um retagulo preto.
+\newenvironment{dem}[1][Demonstra\c c\~ao]{\textbf{#1:}\\ \indent} {\hfill\rule{1ex}{1ex}}
+% Ambiente para resolucao de exercicios.
+\newenvironment{sol}[1][Solu\c c\~ao]{\textbf{\textsf{#1}}:\\ \indent} {\hfill $\Box$}
+%********************************************************************
+\ifMyPack@cabecalho
+% Configuracao de cabecalho personalizado
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% redefine o titulo
+\renewcommand{\title}[1]{\gdef\@title{#1}\gdef\titulo{#1}}
+
+% suprime erro: deixa o titulo em branco, caso nao esteja definido.
+\newcommand{\titulo}{%
+   \PackageError{preambulo}% use the package name
+     {No \protect\title\space given\@gobble}
+     {sem titulo}%
+   \gdef\titulo{}%deixa em branco
+\titulo}
+
+% define o cabecalho
+\newcommand{\cabecalho}[2]{
+  % redefine para que apareca apenas o nº do capitulo.
+  \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\space##1}{}}
+  \renewcommand{\sectionmark}[1]{\markright{\thesection\space##1}}
+  \fancyhead[#1]{\bfseries\leftmark}  %capitulo
+  \fancyhead[#2]{\bfseries\rightmark} %secao
+}
+
+% define o rodape
+\newcommand{\rodape}[2]{
+  \fancyfoot[#1]{R\'egis {\Large \smiley} \the\year} %nome
+  \fancyfoot[C]{\scriptsize{\titulo}}
+  \fancyfoot[#2]{\bfseries\thepage}	%nº da pagina
+}
+
+% define as linhas
+\newcommand{\linha}[1][0.5]{
+  \renewcommand{\headrulewidth}{#1pt}
+  \renewcommand{\footrulewidth}{0.5pt}
+  % limpa o cabecalho da pagina de capitulo
+  \fancypagestyle{plain}{
+    \fancyhead{}
+    \renewcommand{\headrulewidth}{0pt}
+  }
+}
+
+%% if book
+\newcommand*{\BookHead}{%
+  %evenside - lado par
+  %oddside - lado impar
+  \fancyhead{} % deleta a configurac\~ao atual para cabecalho.
+  \cabecalho{LE}{RO}	%lado par: capitulo a esquerda. lado impar: secao a direita
+  \fancyfoot{}
+  \rodape{LO,RE}{LE,RO}	%lado impar: nome a esquerda e pagina a direita. lado par: o contrario
+  \linha
+}
+
+%% if article
+\newcommand*{\ArtHead}{%
+  \fancyhead{}
+  \fancyfoot{}
+  \rodape{L}{R}
+  \linha[0]
+}%
+
+%% if report
+\newcommand*{\RepHead}{%
+  \fancyhead{}
+  \cabecalho{L}{R}
+  \fancyfoot{}
+  \rodape{L}{R}
+  \linha
+}
+
+% \newcommand*{\SetHeaders}{%
+\@ifclassloaded{book}{\BookHead}
+ {\@ifclassloaded{article}{\ArtHead}
+  {\@ifclassloaded{report}{\RepHead}
+    {\typeout{Error: Classe nao suportada: 'article' ou 'report' ou 'book' sao suportadas.}
+    }
+  }
+ }
+% }
+% \SetHeaders
+\fi
+%********************************************************************
+% Estilos de capitulo para Memoir
+
+% Define novas cores
+\definecolor{ared}{rgb}{.647,.129,.149}
+\definecolor{nicered}{rgb}{.647,.129,.149}
+
+% pedersen - requer os pacotes color,graphicx
+% corpedersen significa cor para \chapterstyle{pedersen}
+\newcommand{\corpedersen}[1][ared]{
+  \renewcommand\colorchapnum{\color{#1}}
+  \renewcommand\colorchaptitle{\color{#1}}
+}
+
+% daleif1 - requer os pacotes color,calc,graphicx,soul,fourier
+\newcommand{\daleifA}{%
+  \newlength\dlf@normtxtw
+  \setlength\dlf@normtxtw{\textwidth}
+  \def\myhelvetfont{\def\sfdefault{mdput}}
+  \newsavebox{\feline@chapter}
+  \newcommand\feline@chapter@marker[1][4cm]{%
+    \sbox\feline@chapter{%
+      \resizebox{!}{##1}{\fboxsep=1pt%
+      \colorbox{red}{\color{white}\bfseries\sffamily\thechapter}%
+    }
+  }%
+  \rotatebox{90}{%
+  \resizebox{%
+    \heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}%
+    {!}{\scshape\so\@chapapp}}\quad%
+    \raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
+  }
+  \newcommand\feline@chm[1][4cm]{%
+    \sbox\feline@chapter{\feline@chapter@marker[##1]}%
+    \makebox[0pt][l]{% aka \rlap
+    \makebox[1cm][r]{\usebox\feline@chapter}%
+    }
+  }
+  \makechapterstyle{daleif1}{
+  \renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so}
+  \renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape\color{red}}
+  \renewcommand\chapternamenum{}
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{\null\hfill\feline@chm[2.5cm]\par}
+  \renewcommand\afterchapternum{\par\vskip\midchapskip}
+  \renewcommand\printchaptertitle[1]{\chaptitlefont\raggedleft ####1\par}
+  }
+}
+
+% daleif3 - requer o pacote fourier
+\newcommand{\daleifC}{
+\newif\iffelinenonum
+\newcommand\MyNumToName[1]{%
+  \ifcase##1\relax % case 0
+  \or Primeiro\or Segundo\or Terceiro\or Quarto\or Quinto\or
+  Sexto\or S\'etimo\or Oitavo\or Nono\or D\'ecimo%
+  \else \fi}
+%   \else Not implemented\fi}
+\makechapterstyle{daleif3}{
+  \renewcommand\chapternamenum{}
+  \renewcommand\printchaptername{}
+  \renewcommand\chapnamefont{\small\itshape\centering} 
+  \setlength\midchapskip{7pt}
+  \renewcommand\printchapternum{%
+    \par\chapnamefont\decofourleft\enspace%
+    \ifanappendix
+    \appendixname\space\thechapter%
+    \else%
+    \MyNumToName{\thechapter}\space\chaptername%
+    \fi%
+    \/\enspace\decofourright}
+  \renewcommand\printchapternonum{\par\felinenonumtrue}
+  \renewcommand\chaptitlefont{\huge\itshape\centering}
+  \renewcommand\afterchapternum{%
+    \par\nobreak\vskip-5pt%
+  }
+  \renewcommand\afterchaptertitle{%
+    \par\vskip-2\midchapskip%
+    \rule\textwidth\normalrulethickness
+    \felinenonumfalse
+    \nobreak\vskip\afterchapskip%
+  }
+}
+}
+
+%% cabecalho personalizado para Memoir
+\newcommand{\MemHead}{
+  \copypagestyle{rgstyle}{headings}
+  \makeevenhead{rgstyle}{\slshape\leftmark}{}{}
+  \makeoddhead{rgstyle}{}{}{\slshape\rightmark}
+  \makeoddfoot{rgstyle}{R\'egis {\Large \smiley} \the\year}{}{\thepage}
+  \makeevenfoot{rgstyle}{\thepage}{}{R\'egis {\Large \smiley} \the\year}
+  % adiciona linha no cabecalho e rodape
+  \makeheadrule{headings}{\textwidth}{\normalrulethickness}
+  \makefootrule{headings}{\textwidth}{\normalrulethickness}{\footruleskip}
+  % remove 'capitulo' do rgstyle
+  \addtopsmarks{rgstyle}{}{
+    \createmark{chapter}{both}{shownumber}{}{. \space}
+  }
+  % fix plain
+  \copypagestyle{plain}{rgstyle} % sobrescreve plain com rgstyle
+  \makeoddhead{plain}{}{}{} % remove cabecalho da direita
+  \makeevenhead{plain}{}{}{} % remove cabecalho da esquerda
+  \makeheadrule{plain}{0pt}{0pt} % remove linha
+  \pagestyle{rgstyle}
+  % define secao com letra minuscula
+  \renewcommand\sectionmark[1]{\markright{\thesection\ ##1}}
+}
+
+%********************************************************************
+% Configurando layout para mostrar codigos no doc final.
+
+\definecolor{hellgelb}{rgb}{1,1,0.8}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{1,0,0}
+\definecolor{colString}{rgb}{0,0.5,0}
+
+\usepackage{listings}
+% \lstset{explpreset={
+%     language=C++,
+%     float=hbp,
+%     basicstyle=\ttfamily\small, 
+%     identifierstyle=\color{colIdentifier}, 
+%     keywordstyle=\color{colKeys}, 
+%     stringstyle=\color{colString}, 
+%     commentstyle=\color{colComments}, 
+%     columns=flexible, 
+%     tabsize=4, 
+%     frame=none,   %%frame=single
+%     rframe={}
+%     },
+%     language=C++,
+%     basicstyle=\ttfamily\small, 
+%     identifierstyle=\color{colIdentifier}, 
+%     keywordstyle=\color{colKeys}, 
+%     stringstyle=\color{colString}, 
+%     commentstyle=\color{colComments}, 
+%     hsep=10mm,
+%     extendedchars=true, 
+%     showspaces=false, 
+%     showstringspaces=false, 
+%     numbers=none,  %%numbers=left
+%     %numberstyle=\tiny, 
+%     breaklines=true, 
+%     backgroundcolor=\color{hellgelb}, 
+%     breakautoindent=true, 
+%     captionpos=b,
+%     xleftmargin=0pt,
+% }
+
+%********************************************************************
+\ifMyPack@comandos
+
+%Definindo novos comandos
+\providecommand{\sin}{} \renewcommand{\sin}{\hspace{2pt}\textrm{sen}}
+\providecommand{\tan}{} \renewcommand{\tan}{\hspace{2pt}\textrm{tg}}
+\newcommand{\graus}{\textrm{\ensuremath{^\circ}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\asp}[1]{``#1''}		%aspas
+\newcommand{\mei}{\leqslant} 		%menor ou igual
+\newcommand{\mai}{\geqslant} 		%maior ou igual
+\newcommand{\imp}{\Rightarrow} 		%implica
+\newcommand{\volta}{\Leftarrow} 	%volta
+\newcommand{\sse}{\Leftrightarrow} 	%se s\'o se
+\newcommand{\re}{\operatorname{Re}} 	%parte real
+\newcommand{\im}{\operatorname{Im}} 	%parte imaginaria ou imagem de uma funcao
+\newcommand{\vz}{\emptyset} 		%conjunto vazio
+\newcommand{\e}{\wedge}			%operador e
+\newcommand{\ou}{\vee}			%operador ou
+\newcommand{\aut}{\operatorname{Aut}} 	%automorfismo
+\newcommand{\zb}[1][z]{\overline{ #1 }} %z barra
+\newcommand{\br}[1]{\overline{#1}} 	%barra geral
+\newcommand{\Int}[1]{\operatorname{int #1}} %interior de um conjunto
+\newcommand{\pint}[1]{\mathop #1\limits^ \circ} %interior de um conjunto
+
+%% Somat\'orias
+%%soma 'a_1 + a_2 + ... + a_n'
+\newcommand{\soma}[2][n]{#2_1 + #2_2 + \ldots + #2_{#1}}
+
+%Combina\c c\~ao Linear
+\newcommand{\cl}[3][n]{#2_1#3_1 + #2_2#3_2 + \ldots + #2_{#1}#3_{#1}}
+
+%%somatoria de i = 1 a n (troca o indice), ex: \Soma[j]{a_j}
+\newcommand{\Soma}[2][i]{\sum\limits_{#1 = 1}^n  {#2}}
+
+%%somatoria de k = 0 a m (troca indice, valor inicial e final), ex: \SomaT[j]{0}{m}{a_j}
+\newcommand{\SomaT}[4][i]{\sum\limits_{#1 = #2}^{#3}  {#4}}
+
+%%somatoria de i = 1 a \infty (troca o indice), ex: \Somai[j]{a_j}
+\newcommand{\Somai}[2][i]{\sum\limits_{#1 = 1}^\infty  {#2}}
+
+%%somatoria de k = 0 a \infty (troca indice e valor inicial), ex: \SomaI[j]{0}{a_j}
+\newcommand{\SomaI}[3][i]{\sum\limits_{#1 = #2}^\infty  {#3}}
+
+%%produtorio de i = 1 a n, ex: \Prodi[i]{1}{n}{a_i}
+\newcommand{\Prodi}[4][i]{\prod\limits_{#1 = #2}^{#3} {#4}}
+
+\newcommand{\mc}[1][U]{\mathcal{#1}}
+
+%%requer o pacote mathrsfs. \fc significa func\~oes continuas.
+\newcommand{\fc}[1][C]{\mathscr{#1}}
+
+%%requer o pacote eufrak. \mf significa 'cobertura'
+\newcommand{\mf}[1][C]{\mathfrak{#1}}
+
+%Polin\^omio
+\newcommand{\pol}[2][n]{#2_0  + #2_1 x + #2_2 x^2  +  \ldots  + #2_{#1} x^{#1}}
+
+%bola aberta
+\newcommand{\bola}[2][\varepsilon]{B_{#1} \left({#2}\right)}
+
+%sobrescrito em cima de algo (OverScript).
+\newcommand{\OS}[2]{\mathop {#1}\limits^{#2}}
+
+%subscrito em baixo de algo (UnderScript).
+%usar o comando \ind
+
+%Anexo: qualquer notac\~ao com um subscrito, similar a 'parte de baixo' de limite.
+%Exemplo, \mathop {\sup }\limits_{x \in N} x
+%O nome do comando sugere indice ou familia.
+\newcommand{\ind}[2]{\mathop {#1}\limits_{#2}}
+%\newcommand{\ind}[3]{\mathop {#1}\limits_{#2} {#3}}
+
+%Lower horizontal brace. Exemplo: n.n.n.n ->  n vezes.
+\newcommand{\ubrace}[2]{\underbrace {#1}_{#2}}
+
+%Define um indice de números 1,2,...,n.
+\newcommand{\n}[1][n]{1,2,\ldots,#1}
+
+%Define uma n-upla de 1 a n. Representac\~ao de vetor em R^n.
+%Usar, por exemplo, \vet[n]{a}, onde {n} \'e opcional.
+\newcommand{\vet}[2][n]{{#2}_1,{#2}_2,\ldots,{#2}_{#1}}
+
+%Vetor multiplicado por um escalar.
+\newcommand{\Evet}[3][n]{#2#3_1,#2#3_2,\ldots,#2#3_{#1}}
+
+%Produto interno, notac\~ao
+\newcommand{\PI}[2]{\left\langle {#1,#2} \right\rangle}
+
+%Define norma euclidiana, notac\~ao.
+\newcommand{\norma}[1][x]{\left\| #1 \right\|}
+
+%Norma euclidiana, definic\~ao.
+\newcommand{\Norma}[2][n]{\sqrt{#2_1^2  +  \ldots  + #2_{#1}^2}}
+
+%Uni\~ao de conjuntos
+\newcommand{\uniao}[3]{\bigcup\limits_{#2}^{#3} {#1}}
+
+%Uni\~ao de conjuntos
+\newcommand{\Uniao}[2][n]{{#2}_1 \cup \ldots \cup {#2}_#1}
+
+%Intersec\~ao de conjuntos.
+\newcommand{\inter}[3]{\bigcap\limits_{#2}^{#3} {#1}}
+
+%Intersec\~ao de conjuntos.
+\newcommand{\Inter}[2][n]{{#2}_1 \cap \ldots \cap {#2}_#1}
+
+%Figuras
+\newcommand{\myfig}[3][width=5cm]{
+    \begin{figure}[!htb]
+      \centering
+      \includegraphics[#1]{figuras/#2}
+      \caption{#3}\label{#2}
+    \end{figure}
+}
+
+%Figuras feitas com TikZ
+\newcommand{\tkzfig}[2]{
+    \begin{figure}[!htb]
+      \centering
+      \input{figuras/#1}
+      \caption{#2}\label{#1}
+    \end{figure}
+}
+
+%Figuras feitas com TikZ sem legenda
+\newcommand{\tkzfigonly}[1]{
+      \centering
+      \input{figuras/#1}
+      \label{#1}
+}
+
+%Subfiguras
+\newcommand{\mysubfig}[7][height=2cm]{
+\begin{figure}[!htb]
+  \centering
+  \subfloat[#3]{
+    \includegraphics[#1]{#2}
+    \label{#2}
+  }
+  \quad %espaco separador
+  \subfloat[#5]{
+    \includegraphics[#1]{#4}
+    \label{#4}
+  }
+  \caption{#6}
+  \label{#7}
+\end{figure}
+}
+
+%Subfiguras TikZ
+\newcommand{\tkzsubfig}[6]{
+\begin{figure}[!htb]
+  \centering
+  \subfloat[#2]{
+    \input{figuras/#1}
+    \label{#1}
+  }
+  \quad %espaco separador
+  \subfloat[#4]{
+    \input{figuras/#3}
+    \label{#3}
+  }
+  \caption{#5}
+  \label{#6}
+\end{figure}
+}
+
+%Definic\~ao de func\~ao.
+\newcommand{\myfunc}[5]{%
+\begin{alignat*}{3}
+  #1 \hspace{2pt} : \hspace{2pt} & #2 & \hspace{2pt} \to \hspace{2pt}  & #3  \hfill \\
+  & #4 & \hspace{2pt} \mapsto \hspace{2pt} & #5 \hfill \\
+\end{alignat*}
+}
+
+%Func\~ao de duas sentencas. Similar a definic\~ao de m\'odulo.
+\newcommand{\myfuncS}[5]{%
+\begin{equation*}
+  #1 =
+  \begin{cases}
+    \hfill #2 	& \mbox{, se } #3 \\
+    \hfill #4 	& \mbox{, se } #5
+  \end{cases}
+\end{equation*}
+}
+
+%Limite de #1 quando #2 tende a #3.
+\newcommand{\limite}[3]{%
+\mathop {\lim }\limits_{#2 \to #3 } #1
+}
+
+%Limite quando #1 tende a infinito.
+\newcommand{\limiteI}[1][n]{%
+\mathop {\lim }\limits_{#1 \to \infty }
+}
+
+%minifrac\~ao
+\newcommand{\mfrac}[2]{%
+{\raise0.5ex\hbox{$\scriptstyle #1$}
+\kern-0.1em/\kern-0.15em
+\lower0.25ex\hbox{$\scriptstyle #2$}}
+}
+
+\fi
+\endinput
