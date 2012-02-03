@@ -1,0 +1,55 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+%\pstVerb{/func {180 mul 3.1416 div 4 sub sin neg 4 add} def}
+%sin(x*180/pi-4)+4
+
+% \begin{figure}[!htbp]
+% \begin{center}
+
+\psset{unit=0.75cm}
+
+\begin{pspicture}(-2,-1)(8,6.5)
+    %Função
+    \psplot[linewidth=2pt]{2}{6}{x 180 mul 3.1416 div 4 sub sin neg 4 add} %sin(x*180/pi-4)+4
+
+    %Eixo Ox e Oy
+    %requer o pacote pstricks-add
+    \psaxes[ticks=none]{->}(0,0)(-1,-1)(8,6)
+    \uput[-90](8,0){$x$}
+    \uput[180](0,6){$y$}
+
+    %Rótulos e intervalos do eixo Ox
+    \psline{(-)}(3.5,0)(4.5,0)
+    \psdot[dotscale=1,dotstyle=|](4,0)
+    \uput[-90](3.5,0){$b$}
+    \uput[-90](4,0){$x$}
+    \uput[-90](4.5,0){$c$}
+
+    %Rótulos e intervalos do eixo Oy
+    \psdot[dotscale=1,dotstyle=+](!0 3.5 180 mul 3.1416 div 4 sub sin neg 4 add)
+    \psdot[dotscale=1,dotstyle=+](!0 4 180 mul 3.1416 div 4 sub sin neg 4 add)
+    \psdot[dotscale=1,dotstyle=+](!0 4.5 180 mul 3.1416 div 4 sub sin neg 4 add)
+    \uput[-135](!0 3.5 180 mul 3.1416 div 4 sub sin neg 4 add){$f(b)$}
+    \uput[180](!0 4 180 mul 3.1416 div 4 sub sin neg 4 add){$f(x)=y$}
+    \uput[135](!0 4.5 180 mul 3.1416 div 4 sub sin neg 4 add){$f(c)$}
+
+    %Retas verticais
+    \psline[linestyle=dashed](3.5,0)(!3.5 3.5 180 mul 3.1416 div 4 sub sin neg 4 add)
+    \psline[linestyle=dashed](4,0)(!4 4 180 mul 3.1416 div 4 sub sin neg 4 add)
+    \psline[linestyle=dashed](4.5,0)(!4.5 4.5 180 mul 3.1416 div 4 sub sin neg 4 add)
+
+    %Retas horizontais
+    \psline[linestyle=dashed](!0 3.5 180 mul 3.1416 div 4 sub sin neg 4 add)(!3.5 3.5 180 mul 3.1416 div 4 sub sin neg 4 add)
+    \psline[linestyle=dashed](!0 4 180 mul 3.1416 div 4 sub sin neg 4 add)(!4 4 180 mul 3.1416 div 4 sub sin neg 4 add)
+    \psline[linestyle=dashed](!0 4.5 180 mul 3.1416 div 4 sub sin neg 4 add)(!4.5 4.5 180 mul 3.1416 div 4 sub sin neg 4 add)
+
+\end{pspicture}
+% \caption{TVI} \label{figura05}
+% \end{center}
+% \end{figure} 
+\end{TeXtoEPS}
+\end{document} 

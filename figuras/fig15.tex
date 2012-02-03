@@ -1,0 +1,19 @@
+\documentclass[10pt]{article}
+\usepackage{pstricks-add,pst-eps}
+\usepackage{pstricks,pst-plot,pst-solides3d}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+\psset{unit=0.45,viewpoint=50 30 30 rtp2xyz,Decran=40}
+\begin{pspicture*}(-4.5,-4)(4.5,4.5)
+\axesIIID(-1,-1,-1)(8,5,5)
+\defFunction[algebraic]%
+{helice}(t){t}{2*cos(3*t)}{2*sin(3*t)}
+\psSolid[object=courbe,r=0.01,
+    range=0 6,
+    linecolor=blue,linewidth=0.1,
+    resolution=360,
+    function=helice]%
+\end{pspicture*}
+\end{TeXtoEPS}
+\end{document} 

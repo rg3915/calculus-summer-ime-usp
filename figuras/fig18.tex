@@ -1,0 +1,18 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+\psset{xunit=0.5cm,yunit=0.5cm,algebraic,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-4,-4)(4.5,4.5)
+\psaxes[ticks=none]{->}(0,0)(-4,-4)(4.5,4.5)[$x$,-135][$y$,-45]
+\psellipse(0,0)(0.38,0.76)
+\psellipse(0,0)(0.75,1.5)
+\psellipse(0,0)(1.06,2.12)
+\psellipse(0,0)(1.5,3)
+\psellipse(0,0)(1.88,3.76)
+\psdot(0,0)
+\end{pspicture*}
+\end{TeXtoEPS}
+\end{document} 

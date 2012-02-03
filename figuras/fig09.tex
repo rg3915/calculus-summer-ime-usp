@@ -1,0 +1,26 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=|,dotsize=4pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-0.5,-0.5)(5,3)
+\psaxes[ticks=none]{->}(0,0)(-0.5,-0.5)(5,3)[$x$,-135][$y$,-45]
+\pscustom[linestyle=none,fillstyle=hlines]{\psplot{2.6}{1}{0.4*sin(1.1*x+3.8)+1.5}\lineto(1,0)\lineto(2.6,0)\closepath}
+\psline[linestyle=dashed](1,0)(1,1.11)
+\psline[linestyle=dashed](2.6,0)(2.6,1.65)
+\psplot[plotpoints=200]{0.7}{4.7}{0.4*sin(1.1*x+3.8)+1.5}
+\psline[linestyle=dashed](4.08,0)(4.08,1.86)
+\psline{->}(2.08,2.16)(1.8,0.72)
+\psdots(4.08,0)
+\uput[-90](4.08,0){$b$}
+%\psdots(2.6,0)
+\uput[-90](2.6,0){$x$}
+\psdots(1,0)
+\uput[-90](1,0){$a$}
+%\psdots(2.08,2.16)
+\uput[90](2.08,2.16){$F(x)$}
+\end{pspicture*}
+\end{TeXtoEPS}
+\end{document} 

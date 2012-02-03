@@ -1,0 +1,22 @@
+\begin{tikzpicture}[every node/.style={black}]
+\begin{scope}[x=6pt,y=4pt]
+\draw
+  (2.2,15.1) .. controls (4,14) and (6.4,13.7) ..
+  (8.1,12.4) .. controls (10.6,10.4) and (10,6) ..
+  (11.3,4.7) .. controls (11.7,4.4) and (11.3,5.9) ..
+  (11.3,6.4) .. controls (11.3,8.1) and (11.3,9.7) ..
+  (11.3,11.3) .. controls (11.3,15.5) and (15.6,14.5) ..
+  (18.6,14.5) .. controls (20.7,14.5) and (24.6,14.9) ..
+  (26,12.7)   .. controls (26.7,11.5) and (26.7,8.3) ..
+  (28.5,8.3)  .. controls (30.3,8.30) and (32,12) ..
+  (32.8,12.7) .. controls (32.8,14.3) and (32.6,16.0) ..
+  (32.7,16) .. controls (35.5,13.1) and (33.7,9.06) ..
+  (40,9);
+\fill[blue] (2.2,15.1) circle (2pt) node[below] {$\gamma(a)$};
+\fill[blue] (11.3,4.7) circle (2pt) node[below] {$\gamma(t_1)$};
+\fill[blue] (26,12.7) circle (2pt) node[below left] {$\gamma(t_2)$};
+\fill[blue] (32.8,12.7) circle (2pt) node[left] {$\gamma(t_3)$};
+\fill[blue] (32.6,16) circle (2pt) node[above right] {$\gamma(t_{n-1})$};
+\fill[blue] (40,9) circle (2pt) node[below] {$\gamma(b)$};
+\end{scope}
+\end{tikzpicture}

@@ -1,0 +1,18 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-1,-2)(3,2)
+\psaxes[ticks=none]{->}(0,0)(1,-2)(3,2)[$x$,-135][$y$,-45]
+\multido{\i=-4+1}{8}{%
+\psplot{-1}{3}{(-\i--\i*x)/1}
+}
+\psline[linestyle=dashed](1,-2)(1,2)
+\uput[225](0,0){$0$}
+\uput{12pt}[-30](1,0){$1$}
+\end{pspicture*}
+\end{TeXtoEPS}
+\end{document} 

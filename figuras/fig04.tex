@@ -1,0 +1,48 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+% \begin{figure}[!htbp]
+% \begin{center}
+
+\psset{xunit=0.5cm,yunit=0.5cm}
+
+\begin{pspicture}(-2,-2)(6,6.5)
+    %Função
+    \psplot[linewidth=2pt]{-1}{2}{3}
+    \psplot[linewidth=2pt]{2}{6}{5}
+
+    %Eixo Ox e Oy
+    %requer o pacote pstricks-add
+    \psaxes[ticks=none]{->}(0,0)(-1,-1)(6,6)
+    \uput[-90](6,0){$x$}
+    \uput[180](0,6){$y$}
+
+    %Pontos
+    \psdot[dotscale=2,dotstyle=Bullet](2,5)
+    \psdot[dotscale=2,dotstyle=Circle](2,3)
+
+    %Rótulos e intervalos do eixo Ox
+    \uput[-90](2,0){$2$}
+
+    %Rótulos e intervalos do eixo Oy
+    \psline{(-)}(0,4.5)(0,5.5)
+    \psdot[dotscale=1,dotstyle=+](0,5)
+    \uput[180](0,5){$5$}
+    \psline{<->}(-1,4.5)(-1,5.5)
+    \uput[180](-1,5){$F$}
+
+    %Retas horizontais
+    \psline[linestyle=dashed](2,0)(2,5)
+
+    %Retas verticai
+    \psline[linestyle=dashed](0,5)(2,5)
+
+\end{pspicture}
+% \caption{Fun\c c\~ao de duas senten\c c as} \label{figura04}
+% \end{center}
+% \end{figure} 
+\end{TeXtoEPS}
+\end{document} 

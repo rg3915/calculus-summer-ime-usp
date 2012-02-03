@@ -1,0 +1,19 @@
+\documentclass[10pt]{article}
+\usepackage{pst-eps}
+\usepackage{pst-solides3d}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+\psset{unit=0.4,viewpoint=50 40 30,Decran=50}
+\begin{pspicture}(-4,-2)(5,5.5)
+\axesIIID(-1,-1,-1)(5,5,6.5)
+\defFunction[algebraic]%
+{helice}(t){t*cos(4*t)}{t*sin(4*t)}{t}
+\psSolid[object=courbe,r=0.01,
+range=0 6,
+linecolor=blue,linewidth=0.1,
+resolution=360,
+function=helice]%
+\end{pspicture}
+\end{TeXtoEPS}
+\end{document} 

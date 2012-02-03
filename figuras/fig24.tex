@@ -1,0 +1,18 @@
+\documentclass[10pt]{article}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(-2.5,-3)(3,3)
+\psaxes[ticks=none]{->}(0,0)(-3,-3)(3,3)[$x$,-135][$y$,-45]
+%Domínio
+%a ordem dos xMin e xMax influenciam no dominio.
+\pscustom[linestyle=none,linewidth=1pt,fillstyle=vlines,hatchcolor=blue]{
+    \psplot{10}{-5}{(-5-1*x)/1}
+    \psplot{-5}{10}{(0--1*x)/1}
+}
+\psplot[linewidth=1.5pt]{-3}{3}{(-0--1*x)/1}
+\end{pspicture*}
+\end{TeXtoEPS}
+\end{document} 

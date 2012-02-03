@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{pst-solides3d,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+%elliptic paraboloid
+\psset{unit=0.5}
+\begin{pspicture*}(-5,-2.7)(6,8.7)
+\psset[pst-solides3d]{viewpoint=50 30 20 rtp2xyz,Decran=50}
+\psset{ngrid=.25 .25,linewidth=0.5\pslinewidth}
+%\psSurface[algebraic,
+%    hue=.3 0,incolor=orange]
+%    (-4,-4)(4,4){%
+%    (2*y^2+x^2)/8}
+%Parametric surface
+\defFunction[algebraic]{Paraboloid}(u,v)
+    {u*sin(v)}
+    {u*cos(v)}
+    {0.5*u^2}
+\psSolid[object=surfaceparametree,
+    base=0.001 pi 0.001 2 pi mul,hue=0 .15,incolor=yellow,
+    function=Paraboloid]
+\axesIIID(0,0,4)(5,5,8)
+\end{pspicture*}
+\end{TeXtoEPS}
+\end{document} 

@@ -1,0 +1,34 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+\begin{pspicture*}(0,0)(8,4)
+\pscurve(0.56,1.42)(1.36,2.18)(2.58,1.5)
+        (2.14,0.72)(1.54,1.36)(2.74,2.66)
+        (4.9,2.86)(5.7,1.9)(6.54,1.28)
+        (7.48,2.28)(7.9,2.5)
+\psline(0.56,1.42)(1.36,2.18)(2.58,1.5)
+        (2.14,0.72)(1.54,1.36)(2.74,2.66)
+        (4.9,2.86)(5.7,1.9)(6.54,1.28)
+        (7.48,2.28)(7.9,2.5)
+\psdots(0.56,1.42)
+\uput[-90](0.56,1.42){$\gamma(t_0)$}
+\psdots(1.36,2.18)
+\uput[90](1.36,2.18){$\gamma(t_1)$}
+\psdots(2.58,1.5)
+\uput[0](2.58,1.5){$\gamma(t_2)$}
+\psdots(2.14,0.72)
+\psdots(1.54,1.36)
+\psdots(2.74,2.66)
+\psdots(4.9,2.86)
+\psdots(5.7,1.9)
+\psdots(6.54,1.28)
+\psdots(7.48,2.28)
+\psdots(7.9,2.5)
+\uput[135](7.9,2.5){$\gamma(t_n)$}
+\end{pspicture*}
+\end{TeXtoEPS}
+\end{document} 

@@ -1,0 +1,49 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey,pst-eps}
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+% \begin{figure}[!htbp]
+% \begin{center}
+
+\psset{unit=0.75cm,xunit=0.5cm,yunit=0.5cm}
+
+\begin{pspicture}(-1,-1)(8,6.5)
+    %Função
+    \psplot[linewidth=2pt]{1.7}{4}{x 3 sub 3 exp 1 add} %(x-3)^3+1
+    \psplot[linewidth=2pt]{4}{8}{0.5 x neg 180 mul 3.1416 div sin mul 3.55 add} %0.5sin(x*180/pi)+3.55
+
+    %Eixo Ox e Oy
+    %requer o pacote pstricks-add
+    \psaxes[ticks=none]{->}(0,0)(-1,-1)(8,6)
+    \uput[-90](8,0){$x$}
+    \uput[-180](0,6){$y$}
+
+    %Pontos
+    \psdot[dotscale=2,dotstyle=Bullet](4,4)
+    \psdot[dotscale=2,dotstyle=Circle](4,2)
+
+    %Rótulos e intervalos do eixo Ox
+    \psline{(-)}(3.5,0)(4.5,0)
+    \psdot[dotscale=1,dotstyle=|](4,0)
+    \uput[-90](4,0){$x_0$}
+
+    %Rótulos e intervalos do eixo Oy
+    \psline{(-)}(0,3.5)(0,4.5)
+    \psdot[dotscale=1,dotstyle=+](0,4)
+    \uput[-180](0,4){\tiny{$f(x_0)$}}
+
+    %Retas horizontais
+    \psline[linewidth=0.5pt](0,3.5)(8,3.5)
+    \psline[linestyle=dashed](0,4)(8,4)
+    \psline[linewidth=0.5pt](0,4.5)(8,4.5)
+
+
+
+\end{pspicture}
+% \caption{Fun\c c\~ao descont\'inua} \label{figura03}
+% \end{center}
+% \end{figure} 
+\end{TeXtoEPS}
+\end{document} 
