@@ -38,7 +38,7 @@ in the last chapter.
 
    This material is fully licensed under [Creative Commons
    Attribution-NonCommercial-ShareAlike 3.0 Unported
-   License](http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png).
+   License](http://creativecommons.org/licenses/by-nc-sa/3.0/).
 
 [0]: http://www.me.usp.br/~lymber/
 [1]: http://www.latex-project.org/
