@@ -7,20 +7,18 @@ The main objective of this project is to typeset the notes for a short
 course on multivariate calculus taught at IME-USP in 2008 by professor
 [Alexandre Lymberopoulos][0]. These notes are in Portuguese.
 
-The typing and picture programming work is done by [Régis Santos][3].
-
-This notes are using [LaTeX][1] typesetting system and [TikZ][2] for
- generating the pictures.
-
-A primary intention is to provide a quick introduction to calculus,
-mainly the differential part. Integration is covered briefly in the last
-chapter.
+The typing and picture programming work is done by [Régis Santos][3]
+using [LaTeX][1] typesetting system and [TikZ][2] for generating the
+pictures.
 
 ## Text Organization
 
+A primary intention of this text is to provide a quick introduction to
+calculus, mainly the differential part. Integration is covered briefly
+in the last chapter.
 
 * Chapter 1: Revision of one-variable calculus (nice approach on
-  derivatives) 
+  derivatives)
 
 * Chapter 2: Curves in euclidean space, limits and
   continuity of real valued functions.
@@ -38,9 +36,9 @@ chapter.
 
 ## Copyright and Licence
 
-   This material is fully licensed under Creative Commons
-   Attribution-NonCommercial-ShareAlike 3.0 Unported License.
-   http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png
+   This material is fully licensed under [Creative Commons
+   Attribution-NonCommercial-ShareAlike 3.0 Unported
+   License](http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png).
 
 [0]: http://www.me.usp.br/~lymber/
 [1]: http://www.latex-project.org/
