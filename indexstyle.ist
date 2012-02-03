@@ -1,0 +1,34 @@
+%%% demo-index.ist -- MakeIndex style file for demo.tex
+%%% Example from The LaTeX Companion, page 361.
+%%% $Id: demo-index.ist,v 1.2 1998/11/29 03:22:37 jessen Exp $
+
+%%% Coloca o número de páginas a direita, colocando pontos entre
+%%% a entrada do índice e o número da página, semelhante ao sumário.
+delim_0 "\\dotfill "
+delim_1 "\\dotfill "
+delim_2 "\\dotfill "
+
+%%% Coloca cada letra entre grupos centralizada
+%heading_prefix "{\\bfseries\\hfill "     % Insert in front of letter
+%heading_suffix "\\hfill}\\nopagebreak\n" % Append after letter
+
+%%% Coloca cada letra entre grupos no início da linha
+heading_prefix "{\\bfseries "     % Insert in front of letter
+heading_suffix "}\\nopagebreak\n" % Append after letter
+
+headings_flag  1                  % Turn on headings (uppercase)
+
+%%% Traduz ``Symbols'' e ``Numbers'' para Português.
+% Heading for symbols to be inserted if headings_flag is positive.
+symhead_positive "S\\'{\\i}mbolos"
+
+% Heading for symbols to be inserted if headings_flag is negative.
+symhead_negative "s\\'{\\i}mbolos"
+
+% Heading for numbers to be inserted if headings_flag is positive.
+numhead_positive "N\\'umeros"
+
+% Heading for numbers to be inserted if headings_flag is negative.
+numhead_negative "n\\'umeros"
+
+%%% demo-index.ist ends here.
