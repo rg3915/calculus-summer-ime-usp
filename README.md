@@ -2,7 +2,6 @@
 
 ## Objectives
 
-
 The main objective of this project is to typeset the notes for a short
 course on multivariate calculus taught at IME-USP in 2008 by professor
 [Alexandre Lymberopoulos][0]. These notes are in Portuguese.
