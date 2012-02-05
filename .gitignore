@@ -1,3 +1,12 @@
 *.aux
+<<<<<<< HEAD
 *.log
 *.toc
+=======
+*.idx
+*.lof
+*.log
+*.out
+*.toc
+*~
+>>>>>>> c80d59379f3bf487aa5b9232d295ae5016a36696
