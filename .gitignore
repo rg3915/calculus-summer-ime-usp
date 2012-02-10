@@ -1,5 +1,7 @@
 *.aux
 *.idx
+*.ilg
+*.ind
 *.lof
 *.log
 *.out
