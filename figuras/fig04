@@ -1,0 +1,18 @@
+\usetikzlibrary{arrows}
+\begin{tikzpicture}[>=latex]
+	%eixos
+    \draw[->] (-.5,0) -- (6,0) node[below] {$x$};
+    \draw[->] (0,-.5) -- (0,6) node[left] {$y$};
+	% grafico
+	\draw[blue,very thick] (-.5,3) -- (2,3);
+	\draw[blue,very thick] (2,5) -- (6,5);
+	% rotulo do eixo Ox
+ 	\draw[dashed] (2,0) node[below] {$2$} -- (2,5) -- (0,5);
+	% bola aberta
+	\draw[blue,fill=white] (2,3) circle (3pt);
+	% bola fechada
+	\fill[blue] (2,5) circle (3pt);
+	% rotulo e intervalo do eixo Oy
+	\draw[(-)] (0,4.7) -- (0,5.3);
+	\fill (0,5) circle (2pt) node [left] {$5$};
+\end{tikzpicture}
