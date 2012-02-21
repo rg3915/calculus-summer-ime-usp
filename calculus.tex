@@ -4,6 +4,7 @@
 \documentclass{book}
 \usepackage[paperwidth=18cm,paperheight=24cm,margin=3cm]{geometry}
 \usepackage{preambulo}
+  \usetikzlibrary{arrows,calc}
 \usepackage[a4,center]{crop}	%sem marcas de corte
 \usepackage{microtype}
 \usepackage[normalem]{ulem}
@@ -90,12 +91,12 @@ Seja $f$ uma fun\c c\~ao. Dizemos que $f$ \'e \textit{cont\'inua}\index{Fun\c c\
 \begin{figure}[!h]
   \centering
   \subfloat[Fun\c c\~ao cont\'inua]{
-    \includegraphics[height=3cm]{figuras/fig02}
+    \input{figuras/fig02}
     \label{fig02}
   }
   \quad
   \subfloat[Fun\c c\~ao descont\'inua]{
-    \includegraphics[height=3cm]{figuras/fig03}
+    \input{figuras/fig03}
     \label{fig03}
   }
 \end{figure}
@@ -139,7 +140,7 @@ $f\left( x \right) = \left\{ \begin{gathered}
 
 \end{ex}
 
-\myfig[height=3cm]{fig04}{Fun\c c\~ao de duas senten\c c as}
+\tkzfig{fig04}{Fun\c c\~ao de duas senten\c c as}
 
 \begin{sol}
 contra-exemplo, $F = B_1 \left( {f\left( 2 \right)} \right)$. $\nexists B_r \left( 2 \right)$ tal que $f\left( {B_r \left( 2 \right)} \right) \subset F$.
@@ -5944,7 +5945,7 @@ $f(a)$ e $f(b)$ n\~ao s\~ao m\'inimos.
 
 $f$ cont\'inua em $\left[ {a,b} \right]$, implica, pelo Teorema de Fermat, que $f$ tem m\'inimo no interior, $c \in \left] {a,b} \right[ \Rightarrow f'\left( c \right) = 0$.
 
-\uline{2$^\underline{\textrm{a}}$ vers\~ao} \textit{n\~ao tenho o enunciado da quest\~ao que foi adaptada em sala de aula.}
+2\textordfeminine vers\~ao \textit{n\~ao tenho o enunciado da quest\~ao que foi adaptada em sala de aula.}
 
 \begin{enumerate}[(a)]
 
@@ -6136,7 +6137,7 @@ Mas tamb\'em podemos usar
 \end{gathered}
 \]
 
-\uline{$1^\circ$ modo}
+$1^\circ$ modo
 
 \[
 \begin{gathered}
@@ -6183,7 +6184,7 @@ Ent\~ao
 \end{gathered}
 \]
 
-\uline{$2^\circ$ modo}
+{$2^\circ$ modo}
 
 \[
 \begin{gathered}
@@ -6429,7 +6430,7 @@ Portanto, $(1,0,0)$ e $(-1,0,0)$.
 
 \newpage 
 
-\uline{outro modo}: Multiplicador de Lagrange
+{outro modo}: Multiplicador de Lagrange
 
 Minimizar $d^2 \left( {x,y,z} \right) = x^2  + y^2  + z^2$ sujeito a $x^2  - y^2  - z^2  = 1$. Seja $g\left( {x,y,z} \right) = x^2  - y^2  - z^2  - 1$
 
