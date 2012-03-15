@@ -1,5 +1,5 @@
 \usetikzlibrary{arrows,calc}
-\begin{tikzpicture}[>=latex]
+\begin{tikzpicture}[>=latex,scale=.8]
 	%eixos
     \draw[->] (-.5,0) -- (6,0) node[below] {$x$};
     \draw[->] (0,-.5) -- (0,6) node[left] {$y$};
