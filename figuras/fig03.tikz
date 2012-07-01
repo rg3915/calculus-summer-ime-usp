@@ -1,0 +1,27 @@
+\usetikzlibrary{arrows,calc}
+\begin{tikzpicture}[>=latex,scale=0.8]
+	%eixos
+    \draw[->] (-.5,0) -- (6,0) node[below] {$x$};
+    \draw[->] (0,-.5) -- (0,4) node[left] {$y$};
+	% grafico
+	% (x-3)^3+1 = x^3 - 9x^2 + 27x - 26
+	\draw[blue,very thick,smooth,samples=100,domain=1.9:4]
+  plot(\x,{\x*\x*\x - 9*\x*\x + 27*\x - 26});
+	% 0.5sin(.6*pi*x)+2.5
+	\draw[blue,very thick,smooth,samples=100,domain=4:6]
+  plot(\x,{.5*sin(.6*pi*\x r)+2.5});
+	% rotulo e intervalo do eixo Ox
+ 	\draw[(-)] (3.7,0) -- (4.3,0);
+ 	\fill (4,0) circle (2pt) node [below] {$x_0$};
+	% bola aberta
+	\draw[fill=white] (4,2) circle (3pt);
+	% bola fechada
+	\fill (4,3) circle (3pt);
+	% faixas
+	\draw[red] (0,2.7) -- ++(6,0);
+	\draw[red] (0,3.3) -- ++(6,0);
+	\draw[dashed] (0,3) -- ++(6,0);
+	% rotulo e intervalo do eixo Oy
+	\draw[(-)] (0,2.7) -- (0,3.3);
+	\fill (0,3) circle (2pt) node [left] {$f(x_0)$};
+\end{tikzpicture}

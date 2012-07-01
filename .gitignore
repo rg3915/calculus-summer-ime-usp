@@ -4,9 +4,12 @@
 *.toc
 =======
 *.idx
+*.ilg
+*.ind
 *.lof
 *.log
 *.out
+*.pdf
 *.toc
 *~
 >>>>>>> c80d59379f3bf487aa5b9232d295ae5016a36696
